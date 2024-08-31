@@ -25,7 +25,7 @@ class TestController extends AbstractController
     #[OA\Post(
         path: '/test',
         operationId: 'handleTest',
-        description: 'Создает новый результат теста, принимая идентификатор теста, идентификатор результата теста и список ответов на вопросы. ',
+        description: 'Создает новый результат теста, принимая идентификатор существующего теста, произвольный идентификатор результата теста и список ответов на вопросы.',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
