@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
  * @method Question|null find($id, $lockMode = null, $lockVersion = null)
  * @method Question|null findOneBy(array $criteria, array $orderBy = null)
@@ -26,10 +25,6 @@ class QuestionRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @param int $testId
-     * @return ArrayCollection
-     */
     public function findQuestions(int $testId): ArrayCollection
     {
         $questions = $this->createQueryBuilder('q')
@@ -50,5 +45,4 @@ class QuestionRepository extends ServiceEntityRepository
 
         return $questions;
     }
-
 }

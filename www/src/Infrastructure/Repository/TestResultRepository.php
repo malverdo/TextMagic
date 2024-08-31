@@ -33,5 +33,4 @@ class TestResultRepository extends ServiceEntityRepository
 
         return $resultTest;
     }
-
 }

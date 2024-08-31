@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 class ExceptionMonologListener
 {
     public function __construct(
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -22,6 +22,6 @@ class ExceptionMonologListener
             'Line' => $exception->getLine(),
             'TraceAsString' => $exception->getTraceAsString(),
         ];
-        $this->logger->error('Exception ' . $exception->getMessage(), $error);
+        $this->logger->error('Exception '.$exception->getMessage(), $error);
     }
 }

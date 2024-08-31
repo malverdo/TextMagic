@@ -2,7 +2,6 @@
 
 namespace App\Domain\ValueObject;
 
-use InvalidArgumentException;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
@@ -20,11 +19,11 @@ class Title
     private function ensureIsValidTitle(string $value): void
     {
         if (empty($value)) {
-            throw new InvalidArgumentException('Title cannot be empty');
+            throw new \InvalidArgumentException('Title cannot be empty');
         }
 
         if (strlen($value) > 255) {
-            throw new InvalidArgumentException('Title cannot exceed 255 characters');
+            throw new \InvalidArgumentException('Title cannot exceed 255 characters');
         }
     }
 

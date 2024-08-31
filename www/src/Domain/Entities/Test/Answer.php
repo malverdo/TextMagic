@@ -17,10 +17,8 @@ class Answer
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Embedded(class: Title::class)]
     private Title $title;
-
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]

@@ -17,12 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     public function __construct(
-        private readonly TestHandler       $test,
+        private readonly TestHandler $test,
         private readonly TestResultHandler $testResult,
-    )
-    {
+    ) {
     }
-
 
     #[OA\Post(
         path: '/test',
@@ -62,7 +60,7 @@ class TestController extends AbstractController
                                 }
                             ]
                         }'
-                    )
+                    ),
                 ],
                 ref: '#/components/schemas/RequestResultTestDto'
             )
@@ -75,19 +73,17 @@ class TestController extends AbstractController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status', type: 'string', example: 'success'),
-                        new OA\Property(property: 'response', type: 'array', items: new OA\Items(), example: [])
+                        new OA\Property(property: 'response', type: 'array', items: new OA\Items(), example: []),
                     ],
                     type: 'object'
                 )
-            )
+            ),
         ]
     )]
     #[Route(path: '/test', name: 'app_test_handle', methods: 'POST')]
     public function handleTest(
         #[MapRequestPayload] RequestResultTestDto $resultDto,
-    ): JsonResponse
-    {
-
+    ): JsonResponse {
         $this->test->handler($resultDto);
 
         return new JsonResponse(
@@ -98,11 +94,11 @@ class TestController extends AbstractController
         );
     }
 
-
     #[OA\Get(
         path: '/test/result/{testResultId}',
         operationId: 'getTestResult',
         description: 'Возвращает результат теста',
+        tags: ['Test'],
         parameters: [
             new OA\Parameter(
                 name: 'testResultId',
@@ -113,7 +109,7 @@ class TestController extends AbstractController
                     type: 'integer',
                     example: 21 // Пример значения параметра
                 )
-            )
+            ),
         ],
         responses: [
             new OA\Response(
@@ -150,7 +146,7 @@ class TestController extends AbstractController
                                                     property: 'questionId',
                                                     type: 'integer',
                                                     example: 1
-                                                )
+                                                ),
                                             ],
                                             type: 'object'
                                         )
@@ -174,50 +170,48 @@ class TestController extends AbstractController
                                                     property: 'questionId',
                                                     type: 'integer',
                                                     example: 3
-                                                )
+                                                ),
                                             ],
                                             type: 'object'
                                         )
-                                    )
+                                    ),
                                 ],
                                 type: 'object'
                             ),
                             example: [
                                 [
-                                    "success" => [
+                                    'success' => [
                                         [
-                                            "isCorrect" => true,
-                                            "titleQuestion" => "1 + 1 = ",
-                                            "questionId" => 1
+                                            'isCorrect' => true,
+                                            'titleQuestion' => '1 + 1 = ',
+                                            'questionId' => 1,
                                         ],
                                         [
-                                            "isCorrect" => true,
-                                            "titleQuestion" => "2 + 2 = ",
-                                            "questionId" => 2
-                                        ]
+                                            'isCorrect' => true,
+                                            'titleQuestion' => '2 + 2 = ',
+                                            'questionId' => 2,
+                                        ],
                                     ],
-                                    "failed" => [
+                                    'failed' => [
                                         [
-                                            "isCorrect" => false,
-                                            "titleQuestion" => "3 + 3 = ",
-                                            "questionId" => 3
-                                        ]
-                                    ]
-                                ]
+                                            'isCorrect' => false,
+                                            'titleQuestion' => '3 + 3 = ',
+                                            'questionId' => 3,
+                                        ],
+                                    ],
+                                ],
                             ]
-                        )
+                        ),
                     ],
                     type: 'object'
                 )
-            )
+            ),
         ]
     )]
     #[Route(path: '/test/result/{testResultId}', name: 'app_test_result', methods: 'GET')]
     public function getTestResult(
-        int $testResultId
-    ): JsonResponse
-    {
-
+        int $testResultId,
+    ): JsonResponse {
         $response = $this->testResult->handler($testResultId);
 
         return new JsonResponse(

@@ -20,10 +20,8 @@ class Question
     #[ORM\Embedded(class: Title::class)]
     private Title $title;
 
-
     #[ORM\OneToMany(targetEntity: Answer::class, mappedBy: 'question', cascade: ['persist'])]
     private Collection $answers;
-
 
     #[ORM\ManyToOne(targetEntity: Test::class, inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
@@ -48,5 +46,4 @@ class Question
     {
         return $this->title;
     }
-
 }

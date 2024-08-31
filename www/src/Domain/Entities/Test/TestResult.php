@@ -18,11 +18,6 @@ class TestResult
     #[ORM\Column]
     private array $result = [];
 
-
-    /**
-     * @param int $testId
-     * @param array $result
-     */
     public function __construct(int $id, int $testId, array $result)
     {
         $this->id = $id;

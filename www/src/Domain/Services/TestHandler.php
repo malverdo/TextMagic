@@ -12,12 +12,10 @@ use App\Presentation\Dto\RequestResultTestDto;
 
 class TestHandler
 {
-
     public function __construct(
         private readonly QuestionRepository $questions,
-        private readonly TestResultRepository $testResults
-    )
-    {
+        private readonly TestResultRepository $testResults,
+    ) {
     }
 
     public function handler(RequestResultTestDto $dto): void
@@ -29,14 +27,14 @@ class TestHandler
         $result = [];
 
         foreach ($dto->questions as $questionDto) {
-            $question = $questions->filter(fn($q) => $q->getId() === $questionDto->id)->first();
+            $question = $questions->filter(fn ($q) => $q->getId() === $questionDto->id)->first();
 
-            if ($question === false) {
+            if (false === $question) {
                 continue;
             }
 
             $answerIds = $questionDto->answerIds;
-            $answers = $question->getAnswers()->filter(fn($a) => in_array($a->getId(), $answerIds));
+            $answers = $question->getAnswers()->filter(fn ($a) => in_array($a->getId(), $answerIds));
             $resultQuestion = true;
 
             /**
@@ -54,11 +52,9 @@ class TestHandler
                 'titleQuestion' => $question->getTitle()->getValue(),
                 'questionId' => $question->getId(),
             ];
-
         }
 
         $testResult = new TestResult($testResultId, $testId, $result);
         $this->testResults->save($testResult);
-
     }
 }

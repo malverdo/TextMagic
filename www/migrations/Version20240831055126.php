@@ -79,8 +79,6 @@ final class Version20240831055126 extends AbstractMigration
             (37, 10, \'8\', FALSE),
             (38, 10, \'20\', TRUE)
         ');
-
-
     }
 
     public function down(Schema $schema): void
