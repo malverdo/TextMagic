@@ -6,14 +6,14 @@ namespace App\Domain\Services;
 
 use App\Infrastructure\Repository\TestResultRepository;
 
-class TestResultHandler
+class TestResultGet
 {
     public function __construct(
         private readonly TestResultRepository $testResults,
     ) {
     }
 
-    public function handler(int $testResultId): ?array
+    public function getTestResult(int $testResultId): ?array
     {
         $testResult = $this->testResults->getResultTest($testResultId);
 

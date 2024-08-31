@@ -5,8 +5,8 @@ namespace App\Infrastructure\Repository;
 use App\Domain\Entities\Test\TestResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TestResultRepository extends ServiceEntityRepository
 {
@@ -28,7 +28,7 @@ class TestResultRepository extends ServiceEntityRepository
     {
         $resultTest = $this->findOneBy(['id' => $resultTestId]);
         if (!$resultTest) {
-            throw new NotFoundHttpException();
+            throw new EntityNotFoundException();
         }
 
         return $resultTest;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Presentation\Controller;
 
 use App\Domain\Services\TestHandler;
-use App\Domain\Services\TestResultHandler;
+use App\Domain\Services\TestResultGet;
 use App\Presentation\Dto\RequestResultTestDto;
 use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     public function __construct(
-        private readonly TestHandler $test,
-        private readonly TestResultHandler $testResult,
+        private readonly TestHandler   $test,
+        private readonly TestResultGet $testResult,
     ) {
     }
 
@@ -280,7 +280,7 @@ class TestController extends AbstractController
     public function getTestResult(
         int $testResultId,
     ): JsonResponse {
-        $response = $this->testResult->handler($testResultId);
+        $response = $this->testResult->getTestResult($testResultId);
 
         return new JsonResponse(
             ['status' => 'success', 'response' => [$response]],
