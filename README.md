@@ -16,7 +16,7 @@
 ## Коры
 - Postgres
   - `postgres`
-  - `root
+  - `root`
   - `5432`
 
 ## DDD
