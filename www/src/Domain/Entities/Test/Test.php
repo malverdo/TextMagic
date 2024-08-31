@@ -16,7 +16,7 @@ class Test
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Embedded(class: Title::class)]
     private Title $title;

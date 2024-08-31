@@ -15,14 +15,13 @@ class Answer
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Embedded(class: Title::class)]
     private Title $title;
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Ignore]
     private ?Question $question = null;
 
     #[ORM\Column]
