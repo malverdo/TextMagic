@@ -1,0 +1,11 @@
+nelmio_api_doc:
+  areas:
+    default:
+      name_patterns:
+        - 'app_*'
+  # Только маршруты, у которых имя начинается с app_
+  documentation:
+    info:
+      title: 'API Documentation'
+      description: 'API documentation for your Symfony project'
+      version: '1.0.0'

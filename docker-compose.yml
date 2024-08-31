@@ -1,0 +1,41 @@
+version: '3'
+services:
+  web:
+    container_name: ${APP}_nginx
+    build:
+      context: deployment/docker/${APP}/nginx
+      dockerfile: Dockerfile
+    ports:
+      - ${NGNIX_PORT}:3005
+    volumes:
+      - ./deployment/docker/${APP}/conf/www.conf:/etc/nginx/conf.d/www.conf
+      - ./www:/var/www/html
+    depends_on:
+      - php_fpm
+      - postgres
+
+  php_fpm:
+    container_name: ${APP}_php_fpm
+    build:
+      context: deployment/docker/${APP}/php
+      dockerfile: php-fpm.docker
+    volumes:
+      - ./www:/var/www/html
+    # настройка Xdebug
+    environment:
+      - PHP_IDE_CONFIG=serverName=php
+
+  postgres:
+    container_name: ${APP}_postgres
+    build:
+      context: deployment/docker/${APP}/postgres
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - ./deployment/db/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+      - ./deployment/postgres-data:/var/lib/postgresql/data
