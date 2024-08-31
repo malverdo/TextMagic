@@ -20,26 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # Console command
-
-
-    # Service
-#    App\Presentation\Request\:
-#        resource: '../src/Presentation/Request'
-#
-#    App\Presentation\Dto\Message\:
-#        resource: '../src/Presentation/Dto/Message'
-#
-#    App\Presentation\ArgumentResolver\:
-#        resource: '../src/Presentation/ArgumentResolver'
-
-
-
-
     App\Infrastructure\Repository\:
         resource: '../src/Infrastructure/Repository/'
         tags: [ 'doctrine.repository_service' ]
 
-    App\Application\EventListener\ExceptionMonologListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
