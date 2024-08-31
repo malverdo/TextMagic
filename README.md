@@ -7,7 +7,6 @@
 - `docker exec dev_php_fpm composer install`
 - `docker exec dev_php_fpm php bin/console doctrine:migrations:migrate`
 
-
 ## Swagger
 - `http://localhost:2095/api/doc`
 
