@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Entities\Test;
+namespace App\Domain\Test\Entity;
 
 use App\Domain\ValueObject\Title;
 use App\Infrastructure\Repository\TestRepository;

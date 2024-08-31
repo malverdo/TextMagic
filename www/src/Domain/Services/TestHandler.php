@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Services;
 
-use App\Domain\Entities\Test\Answer;
-use App\Domain\Entities\Test\TestResult;
+use App\Domain\Test\Entity\Answer;
+use App\Domain\Test\Entity\TestResult;
 use App\Infrastructure\Repository\QuestionRepository;
 use App\Infrastructure\Repository\TestResultRepository;
 use App\Presentation\Dto\RequestResultTestDto;

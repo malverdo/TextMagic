@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Entities\Test;
+namespace App\Domain\Test\Entity;
 
 use App\Domain\ValueObject\Title;
 use App\Infrastructure\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: AnswerRepository::class)]
 class Answer
