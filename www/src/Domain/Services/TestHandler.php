@@ -9,6 +9,7 @@ use App\Domain\Entities\Test\TestResult;
 use App\Infrastructure\Repository\QuestionRepository;
 use App\Infrastructure\Repository\TestResultRepository;
 use App\Presentation\Dto\RequestResultTestDto;
+use Exception;
 
 class TestHandler
 {
@@ -18,13 +19,16 @@ class TestHandler
     ) {
     }
 
+    /**
+     * @throws Exception
+     */
     public function handler(RequestResultTestDto $dto): void
     {
         $testId = $dto->testId;
         $testResultId = $dto->testResultId;
-        $questions = $this->questions->getQuestions($testId);
-
+        $answersDetails = [];
         $result = [];
+        $questions = $this->questions->getQuestions($testId);
 
         foreach ($dto->questions as $questionDto) {
             $question = $questions->filter(fn ($q) => $q->getId() === $questionDto->id)->first();
@@ -37,21 +41,29 @@ class TestHandler
             $answers = $question->getAnswers()->filter(fn ($a) => in_array($a->getId(), $answerIds));
             $resultQuestion = true;
 
+
             /**
              * @var Answer $answer
              */
             foreach ($answers as $answer) {
+                $answersDetails[] = [
+                    'title' => $answer->getTitle()->getValue(),
+                    'answerId' => $answer->getId()
+                ];
+
                 if (!$answer->getIsCorrect()) {
                     $resultQuestion = false;
-                    break;
                 }
+
             }
 
             $result[$resultQuestion ? 'success' : 'failed'][] = [
                 'isCorrect' => $resultQuestion,
                 'titleQuestion' => $question->getTitle()->getValue(),
                 'questionId' => $question->getId(),
+                'answers' => $answersDetails,
             ];
+            $answersDetails = [];
         }
 
         $testResult = new TestResult($testResultId, $testId, $result);

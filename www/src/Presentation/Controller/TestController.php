@@ -107,9 +107,9 @@ class TestController extends AbstractController
                 required: true,
                 schema: new OA\Schema(
                     type: 'integer',
-                    example: 21 // Пример значения параметра
+                    example: 21
                 )
-            ),
+            )
         ],
         responses: [
             new OA\Response(
@@ -147,6 +147,25 @@ class TestController extends AbstractController
                                                     type: 'integer',
                                                     example: 1
                                                 ),
+                                                new OA\Property(
+                                                    property: 'answers',
+                                                    type: 'array',
+                                                    items: new OA\Items(
+                                                        properties: [
+                                                            new OA\Property(
+                                                                property: 'title',
+                                                                type: 'string',
+                                                                example: '2'
+                                                            ),
+                                                            new OA\Property(
+                                                                property: 'answerId',
+                                                                type: 'integer',
+                                                                example: 2
+                                                            )
+                                                        ],
+                                                        type: 'object'
+                                                    )
+                                                )
                                             ],
                                             type: 'object'
                                         )
@@ -171,41 +190,90 @@ class TestController extends AbstractController
                                                     type: 'integer',
                                                     example: 3
                                                 ),
+                                                new OA\Property(
+                                                    property: 'answers',
+                                                    type: 'array',
+                                                    items: new OA\Items(
+                                                        type: 'object',
+                                                        properties: [
+                                                            new OA\Property(
+                                                                property: 'title',
+                                                                type: 'string',
+                                                                example: '1'
+                                                            ),
+                                                            new OA\Property(
+                                                                property: 'answerId',
+                                                                type: 'integer',
+                                                                example: 8
+                                                            )
+                                                        ]
+                                                    )
+                                                )
                                             ],
                                             type: 'object'
                                         )
-                                    ),
+                                    )
                                 ],
                                 type: 'object'
                             ),
                             example: [
                                 [
-                                    'success' => [
+                                    "success" => [
                                         [
-                                            'isCorrect' => true,
-                                            'titleQuestion' => '1 + 1 = ',
-                                            'questionId' => 1,
+                                            "isCorrect" => true,
+                                            "titleQuestion" => "1 + 1 = ",
+                                            "questionId" => 1,
+                                            "answers" => [
+                                                [
+                                                    "title" => "2",
+                                                    "answerId" => 2
+                                                ]
+                                            ]
                                         ],
                                         [
-                                            'isCorrect' => true,
-                                            'titleQuestion' => '2 + 2 = ',
-                                            'questionId' => 2,
-                                        ],
+                                            "isCorrect" => true,
+                                            "titleQuestion" => "2 + 2 = ",
+                                            "questionId" => 2,
+                                            "answers" => [
+                                                [
+                                                    "title" => "4",
+                                                    "answerId" => 4
+                                                ],
+                                                [
+                                                    "title" => "3 + 1",
+                                                    "answerId" => 5
+                                                ]
+                                            ]
+                                        ]
                                     ],
-                                    'failed' => [
+                                    "failed" => [
                                         [
-                                            'isCorrect' => false,
-                                            'titleQuestion' => '3 + 3 = ',
-                                            'questionId' => 3,
-                                        ],
-                                    ],
-                                ],
+                                            "isCorrect" => false,
+                                            "titleQuestion" => "3 + 3 = ",
+                                            "questionId" => 3,
+                                            "answers" => [
+                                                [
+                                                    "title" => "1",
+                                                    "answerId" => 8
+                                                ],
+                                                [
+                                                    "title" => "6",
+                                                    "answerId" => 9
+                                                ],
+                                                [
+                                                    "title" => "2 + 4",
+                                                    "answerId" => 10
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
                             ]
-                        ),
+                        )
                     ],
                     type: 'object'
                 )
-            ),
+            )
         ]
     )]
     #[Route(path: '/test/result/{testResultId}', name: 'app_test_result', methods: 'GET')]

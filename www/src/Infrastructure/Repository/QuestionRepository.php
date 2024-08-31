@@ -6,8 +6,8 @@ use App\Domain\Entities\Test\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @method Question|null find($id, $lockMode = null, $lockVersion = null)
@@ -40,7 +40,7 @@ class QuestionRepository extends ServiceEntityRepository
     {
         $questions = $this->findQuestions($testId);
         if ($questions->isEmpty()) {
-            throw new NotFoundHttpException();
+            throw new EntityNotFoundException();
         }
 
         return $questions;
