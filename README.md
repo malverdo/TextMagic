@@ -4,7 +4,8 @@
 - `git clone git@github.com:malverdo/TextMagic.git`
 - `docker build`
 - `docker up -d`
-- `docker exec php bin/console doctrine:migrations:migrate`
+- `docker exec dev_php_fpm composer install`
+- `docker exec dev_php_fpm php bin/console doctrine:migrations:migrate`
 
 
 ## Swagger
