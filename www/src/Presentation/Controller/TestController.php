@@ -84,7 +84,7 @@ class TestController extends AbstractController
     public function handleTest(
         #[MapRequestPayload] RequestResultTestDto $resultDto,
     ): JsonResponse {
-        $this->test->handler($resultDto);
+        $this->test->handle($resultDto);
 
         return new JsonResponse(
             ['status' => 'success', 'response' => []],
