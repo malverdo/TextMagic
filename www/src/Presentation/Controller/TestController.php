@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     public function __construct(
-        private readonly TestHandler   $test,
+        private readonly TestHandler $test,
         private readonly TestResultGet $testResult,
     ) {
     }
@@ -109,7 +109,7 @@ class TestController extends AbstractController
                     type: 'integer',
                     example: 21
                 )
-            )
+            ),
         ],
         responses: [
             new OA\Response(
@@ -161,11 +161,11 @@ class TestController extends AbstractController
                                                                 property: 'answerId',
                                                                 type: 'integer',
                                                                 example: 2
-                                                            )
+                                                            ),
                                                         ],
                                                         type: 'object'
                                                     )
-                                                )
+                                                ),
                                             ],
                                             type: 'object'
                                         )
@@ -205,75 +205,75 @@ class TestController extends AbstractController
                                                                 property: 'answerId',
                                                                 type: 'integer',
                                                                 example: 8
-                                                            )
+                                                            ),
                                                         ]
                                                     )
-                                                )
+                                                ),
                                             ],
                                             type: 'object'
                                         )
-                                    )
+                                    ),
                                 ],
                                 type: 'object'
                             ),
                             example: [
                                 [
-                                    "success" => [
+                                    'success' => [
                                         [
-                                            "isCorrect" => true,
-                                            "titleQuestion" => "1 + 1 = ",
-                                            "questionId" => 1,
-                                            "answers" => [
+                                            'isCorrect' => true,
+                                            'titleQuestion' => '1 + 1 = ',
+                                            'questionId' => 1,
+                                            'answers' => [
                                                 [
-                                                    "title" => "2",
-                                                    "answerId" => 2
-                                                ]
-                                            ]
+                                                    'title' => '2',
+                                                    'answerId' => 2,
+                                                ],
+                                            ],
                                         ],
                                         [
-                                            "isCorrect" => true,
-                                            "titleQuestion" => "2 + 2 = ",
-                                            "questionId" => 2,
-                                            "answers" => [
+                                            'isCorrect' => true,
+                                            'titleQuestion' => '2 + 2 = ',
+                                            'questionId' => 2,
+                                            'answers' => [
                                                 [
-                                                    "title" => "4",
-                                                    "answerId" => 4
+                                                    'title' => '4',
+                                                    'answerId' => 4,
                                                 ],
                                                 [
-                                                    "title" => "3 + 1",
-                                                    "answerId" => 5
-                                                ]
-                                            ]
-                                        ]
+                                                    'title' => '3 + 1',
+                                                    'answerId' => 5,
+                                                ],
+                                            ],
+                                        ],
                                     ],
-                                    "failed" => [
+                                    'failed' => [
                                         [
-                                            "isCorrect" => false,
-                                            "titleQuestion" => "3 + 3 = ",
-                                            "questionId" => 3,
-                                            "answers" => [
+                                            'isCorrect' => false,
+                                            'titleQuestion' => '3 + 3 = ',
+                                            'questionId' => 3,
+                                            'answers' => [
                                                 [
-                                                    "title" => "1",
-                                                    "answerId" => 8
+                                                    'title' => '1',
+                                                    'answerId' => 8,
                                                 ],
                                                 [
-                                                    "title" => "6",
-                                                    "answerId" => 9
+                                                    'title' => '6',
+                                                    'answerId' => 9,
                                                 ],
                                                 [
-                                                    "title" => "2 + 4",
-                                                    "answerId" => 10
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
+                                                    'title' => '2 + 4',
+                                                    'answerId' => 10,
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ]
-                        )
+                        ),
                     ],
                     type: 'object'
                 )
-            )
+            ),
         ]
     )]
     #[Route(path: '/test/result/{testResultId}', name: 'app_test_result', methods: 'GET')]
