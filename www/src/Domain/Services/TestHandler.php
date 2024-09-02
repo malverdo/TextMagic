@@ -19,10 +19,9 @@ class TestHandler
     ) {
     }
 
-    public function handle(RequestResultTestDto $dto): void
+    public function handle(RequestResultTestDto $dto): int
     {
         $testId = $dto->testId;
-        $testResultId = $dto->testResultId;
         $result = [];
         $questions = $this->questions->getQuestions($testId);
 
@@ -44,8 +43,10 @@ class TestHandler
             );
         }
 
-        $testResult = new TestResult($testResultId, $testId, $result);
+        $testResult = new TestResult($testId, $result);
         $this->testResults->save($testResult);
+
+        return $testResult->getId();
     }
 
     /**

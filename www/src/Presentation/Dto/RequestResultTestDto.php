@@ -14,7 +14,6 @@ class RequestResultTestDto
     public function __construct(
         #[Assert\NotBlank]
         public int $testId,
-        public int $testResultId,
         #[Assert\NotBlank]
         #[Assert\Valid]
         public array $questions = [],

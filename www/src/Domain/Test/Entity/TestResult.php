@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TestResult
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
     private int $id;
 
@@ -18,9 +19,8 @@ class TestResult
     #[ORM\Column]
     private array $result = [];
 
-    public function __construct(int $id, int $testId, array $result)
+    public function __construct(int $testId, array $result)
     {
-        $this->id = $id;
         $this->testId = $testId;
         $this->result = $result;
     }
@@ -28,5 +28,10 @@ class TestResult
     public function getResult(): array
     {
         return $this->result;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

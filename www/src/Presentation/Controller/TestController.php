@@ -25,7 +25,7 @@ class TestController extends AbstractController
     #[OA\Post(
         path: '/test',
         operationId: 'handleTest',
-        description: 'Создает новый результат теста, принимая идентификатор существующего теста, произвольный идентификатор результата теста и список ответов на вопросы.',
+        description: 'Создает новый результат теста, принимая идентификатор существующего теста, возвращает id результата',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
@@ -35,7 +35,6 @@ class TestController extends AbstractController
                         summary: 'Пример 1',
                         value: '{
                             "testId": 1, 
-                            "testResultId": 21,
                             "questions": [
                                 {
                                     "id": 1,
@@ -73,7 +72,7 @@ class TestController extends AbstractController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status', type: 'string', example: 'success'),
-                        new OA\Property(property: 'response', type: 'array', items: new OA\Items(), example: []),
+                        new OA\Property(property: 'response', type: 'array', items: new OA\Items(), example: ['resultTestId' => 1]),
                     ],
                     type: 'object'
                 )
@@ -84,10 +83,10 @@ class TestController extends AbstractController
     public function handleTest(
         #[MapRequestPayload] RequestResultTestDto $resultDto,
     ): JsonResponse {
-        $this->test->handle($resultDto);
+        $resultTestId = $this->test->handle($resultDto);
 
         return new JsonResponse(
-            ['status' => 'success', 'response' => []],
+            ['status' => 'success', 'response' => ['resultTestId' => $resultTestId]],
             Response::HTTP_CREATED,
             ['Content-Type' => 'application/json; charset=utf-8'],
             false
@@ -107,7 +106,7 @@ class TestController extends AbstractController
                 required: true,
                 schema: new OA\Schema(
                     type: 'integer',
-                    example: 21
+                    example: 1
                 )
             ),
         ],
